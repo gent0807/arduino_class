@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Arduino",
-            "compilerPath": "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\bin\\avr-g++",
+            "compilerPath": "D:\\vs code 환경 개발\\arduino_class\\Arduino\\hardware\\tools\\avr\\bin\\avr-g++",
             "compilerArgs": [
                 "-std=gnu++11",
                 "-fpermissive",
@@ -15,14 +15,11 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
-                "c:\\program files (x86)\\arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include",
-                "c:\\program files (x86)\\arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include-fixed",
-                "c:\\program files (x86)\\arduino\\hardware\\tools\\avr\\avr\\include"
+                "D:\\vs code 환경 개발\\arduino_class\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+                "D:\\vs code 환경 개발\\arduino_class\\Arduino\\hardware\\arduino\\avr\\variants\\standard"
             ],
             "forcedInclude": [
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+                "D:\\vs code 환경 개발\\arduino_class\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
