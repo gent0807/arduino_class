@@ -16,6 +16,7 @@ void loop()
     Serial.print(" humidity:");
     Serial.print(humi);
     Serial.println();
+
   }
   else                                
   {
