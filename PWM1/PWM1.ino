@@ -9,11 +9,10 @@ void setup()
 
 void loop() 
 { 
-  for(brightness=0; brightness<=255; brightness+=fadeAmount){
+  for(int brightness=0; brightness<=255; brightness+=fadeAmount){
     analogWrite(led, brightness); 
     delay(30);
     
     } 
     
-   
 }
