@@ -13,6 +13,6 @@ void loop() {
     AT09.write(Serial.read());
     }
   if(AT09.available()){
-    Serial.write(AT09.read());
+    Serial.write(AT09.read());wkd
     }
 }
