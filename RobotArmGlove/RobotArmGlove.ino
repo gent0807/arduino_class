@@ -9,10 +9,24 @@ void setup() {
 }
 void loop() {
   // put your main code here, to run repeatedly:
-  if(Serial.available()){
+  /*if(Serial.available()){
     Slave1.write(Serial.read());
     }
   if(Slave1.available()){
     Serial.write(Slave1.read());
+    }
+  */
+  /*if(Slave1.available()){
+    String text=Slave1.readStringUntil(0x0d);
+    Serial.println(text);
+    }
+    delay(1000);
+   */
+   if(Slave1.available()){
+    char receive[2];
+
+    Slave1.readBytes(receive, 2);
+    Serial.print(receive[0]);
+    Serial.println(receive[1]);
     }
 }
