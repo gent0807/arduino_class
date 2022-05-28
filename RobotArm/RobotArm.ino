@@ -10,10 +10,15 @@ void setup() {
 }
 void loop() {
   // put your main code here, to run repeatedly:
-  if(Serial.available()){
+  /*if(Serial.available()){
     Master1.write(Serial.read());
     }
   if(Master1.available()){
     Serial.write(Master1.read());
     }
+*/
+/*Master1.println("SYS");*/
+char data[]={'0','K'};
+Master1.write(data,2);
+delay(1000);
 }
