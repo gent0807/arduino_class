@@ -4,8 +4,8 @@ SoftwareSerial Master1(2,3);
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
   Master1.begin(9600);
+  Serial.begin(9600);
   //Slave2.begin(9600);
 }
 void loop() {
@@ -18,7 +18,8 @@ void loop() {
     }
 */
 /*Master1.println("SYS");*/
-char data[]={'0','K'};
+/*char data[]={'0','K'};
 Master1.write(data,2);
 delay(1000);
+*/
 }
