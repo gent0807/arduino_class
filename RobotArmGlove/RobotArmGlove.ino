@@ -51,7 +51,7 @@ void loop() {
       Slave1.write('1');
       }
       */
-      char led_state[2];
+     /* char led_state[2];
       for(int i=0;i<2;i++){
         if(digitalRead(button[i])==LOW){
           led_state[i]='0';
@@ -61,4 +61,6 @@ void loop() {
           }
         }
       Slave1.write(led_state,2);
+      */
+      Serial.println(analogRead(A0));
 }
