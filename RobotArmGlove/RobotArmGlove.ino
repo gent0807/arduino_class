@@ -55,10 +55,10 @@ void loop() {
       for(int i=0;i<2;i++){
         if(digitalRead(button[i])==LOW){
           led_state[i]='0';
-          }
+         }
         else if(digitalRead(button[i])==HIGH){
           led_state[i]='1';
           }
         }
-       Slave1.print(led_state);
+      Slave1.print(led_state);
 }
