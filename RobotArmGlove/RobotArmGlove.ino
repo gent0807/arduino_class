@@ -61,9 +61,5 @@ void loop() {
           }
         }
       Slave1.write(led_state,2);
-      for(int i=0;i<2;i++){
-        int r=analogRead(A0);
-        byte s=map(r,0,1023,0,255);
-      Slave1.write(s);
-      }
+      
 }
