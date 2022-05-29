@@ -1,4 +1,7 @@
+#include <DHT11.h>
+
 #include <SoftwareSerial.h>
+
 SoftwareSerial Master1(2,3);
 //SoftwareSerial Slave2(4,5);
 //const int led1=4;
@@ -86,6 +89,7 @@ for(int i=0;i<3;i++){
   }
 
 Master1.write(state,1);
+
 byte brightness=analogRead(A0);
 if(brightness<100){
   digitalWrite(cds_output, HIGH);
