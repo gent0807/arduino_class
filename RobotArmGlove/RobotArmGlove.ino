@@ -1,17 +1,19 @@
 #include <SoftwareSerial.h>
 SoftwareSerial Slave1(2,3);
-//SoftwareSerial Master2(4.5);
+
 
 //const int button1=4;
 //const int button2=5;
-byte button[]={4,5};
+byte sensing[]={4,5,A0};
 void setup() {
   // put your setup code here, to run once:
   Slave1.begin(9600);
   Serial.begin(9600);
-  for(int i=0; i<2;i++){
-    pinMode(button[i], INPUT);
+  for(int i=0; i<3;i++){
+    if(i==0||i==1)
+    pinMode(sensing[i], INPUT);
     }
+  
   //Master2.begin(9600);
   //pinMode(button1,INPUT);
   //pinMode(button2,INPUT);
@@ -51,16 +53,22 @@ void loop() {
       Slave1.write('1');
       }
       */
-     /* char led_state[2];
-      for(int i=0;i<2;i++){
-        if(digitalRead(button[i])==LOW){
-          led_state[i]='0';
+    byte state[3];
+      for(int i=0;i<3;i++){
+        if((i==0||i==1)&&digitalRead(sensing[i])==LOW){
+          state[i]='0';
          }
-        else if(digitalRead(button[i])==HIGH){
-          led_state[i]='1';
+        else if((i==0||i==1)&&digitalRead(sensing[i])==HIGH){
+          state[i]='1';
           }
+        else if((i==2)&&analogRead(sensing[i])>=0){
+          int r=analogRead(sensing[i]);
+          r=map(r,0,1023,2,255);
+          state[i]=(byte)r;
         }
-      Slave1.write(led_state,2);
-      */
-      Serial.println(analogRead(A0));
+      }
+       Slave1.write(state,3);
+      
+     
+      
 }
