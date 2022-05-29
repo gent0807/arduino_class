@@ -61,5 +61,4 @@ void loop() {
           }
         }
       Slave1.write(led_state,2);
-      
 }
