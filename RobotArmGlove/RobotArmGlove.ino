@@ -5,6 +5,7 @@ SoftwareSerial Slave1(2,3);
 //const int button1=4;
 //const int button2=5;
 byte sensing[]={4,5,A0};
+byte action[]={7};
 void setup() {
   // put your setup code here, to run once:
   Slave1.begin(9600);
@@ -12,6 +13,10 @@ void setup() {
   for(int i=0; i<3;i++){
     if(i==0||i==1)
     pinMode(sensing[i], INPUT);
+    }
+  for(int i=0; i<1;i++){
+    if(i==0)
+    pinMode(action[i], OUTPUT);
     }
   
   //Master2.begin(9600);
@@ -53,13 +58,33 @@ void loop() {
       Slave1.write('1');
       }
       */
+    byte receive[1];
     byte state[3];
-      for(int i=0;i<3;i++){
+    Slave1.readBytes(receive,1);
+    for(int i=0;i<3;i++){
         if((i==0||i==1)&&digitalRead(sensing[i])==LOW){
           state[i]='0';
+          
+          if(i==0&&receive[i]=='0'){
+          noTone(action[i]);
+          }
+          else if(i==0&&receive[i]=='1'){
+          tone(action[i],294);
+          } 
+          
+          
+          
+          
          }
         else if((i==0||i==1)&&digitalRead(sensing[i])==HIGH){
           state[i]='1';
+          if(i==0&&receive[i]=='0'){
+          noTone(action[i]);
+          }
+          else if(i==0&&receive[i]=='1'){
+          tone(action[i],294);
+          } 
+          
           }
         else if((i==2)&&analogRead(sensing[i])>=0){
           int r=analogRead(sensing[i]);
@@ -67,8 +92,22 @@ void loop() {
           state[i]=(byte)r;
         }
       }
+    
        Slave1.write(state,3);
-      
-     
-      
+   /*byte receive[1];
+   if(Slave1.available()){
+    Slave1.readBytes(receive,1);
+    for(int i=0; i<1; i++){
+      if(i==0&&receive[i]=='0'){
+        noTone(action[i]);
+        }
+      else if(i==0&&receive[i]=='1')
+        for(int i=0;i<10;i++){
+          tone(action[i],294);
+          delay(1000);
+          } 
+        } 
+      }
+    }
+   }*/
 }
