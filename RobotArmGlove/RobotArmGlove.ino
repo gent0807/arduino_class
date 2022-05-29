@@ -1,3 +1,6 @@
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+
 #include <SoftwareSerial.h>
 SoftwareSerial Slave1(2,3);
 
@@ -69,7 +72,10 @@ void loop() {
           noTone(action[i]);
           }
           else if(i==0&&receive[i]=='1'){
+          
           tone(action[i],294);
+          
+           
           } 
           
           
@@ -82,7 +88,10 @@ void loop() {
           noTone(action[i]);
           }
           else if(i==0&&receive[i]=='1'){
+         
           tone(action[i],294);
+         
+          
           } 
           
           }
