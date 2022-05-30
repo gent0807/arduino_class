@@ -12,6 +12,7 @@ byte action[]={7};
 void setup() {
   // put your setup code here, to run once:
   lcd.begin();
+  lcd.backlight();
   Slave1.begin(9600);
   Serial.begin(9600);
   for(int i=0; i<3;i++){
@@ -79,10 +80,11 @@ void loop() {
            
           } 
           else if(i==1&&receive[i]>=0){
+            lcd.clear();
+            lcd.setCursor(0,0);
             lcd.print("humid :");
             lcd.print(receive[i]);
-            }
-          
+          }
          }
         else if((i==0||i==1)&&digitalRead(sensing[i])==HIGH){
           state[i]='1';
@@ -96,7 +98,9 @@ void loop() {
           
           } 
           else if(i==1&&receive[i]>=0){
-            lcd.print("humid :");
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("humid:");
             lcd.print(receive[i]);
             }
           
@@ -106,8 +110,9 @@ void loop() {
           r=map(r,0,1023,2,255);
           state[i]=(byte)r;
           if(receive[i]>=0){
-            lcd.print(" temperature :");
-            lcd.println(receive[i]);
+            lcd.setCursor(0,1);
+            lcd.print("temperature:");
+            lcd.print(receive[i]);
             }          
         }
       }
