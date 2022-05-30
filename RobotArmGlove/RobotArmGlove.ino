@@ -3,7 +3,7 @@
 
 #include <SoftwareSerial.h>
 SoftwareSerial Slave1(2,3);
-
+LiquidCrystal_I2C lcd(0x27,16,2);
 
 //const int button1=4;
 //const int button2=5;
@@ -11,6 +11,7 @@ byte sensing[]={4,5,A0};
 byte action[]={7};
 void setup() {
   // put your setup code here, to run once:
+  lcd.begin();
   Slave1.begin(9600);
   Serial.begin(9600);
   for(int i=0; i<3;i++){
@@ -78,8 +79,8 @@ void loop() {
            
           } 
           else if(i==1&&receive[i]>=0){
-            Serial.print("humid :");
-            Serial.print(receive[i]);
+            lcd.print("humid :");
+            lcd.print(receive[i]);
             }
           
          }
@@ -95,8 +96,8 @@ void loop() {
           
           } 
           else if(i==1&&receive[i]>=0){
-            Serial.print("humid :");
-            Serial.print(receive[i]);
+            lcd.print("humid :");
+            lcd.print(receive[i]);
             }
           
           }
@@ -105,8 +106,8 @@ void loop() {
           r=map(r,0,1023,2,255);
           state[i]=(byte)r;
           if(receive[i]>=0){
-            Serial.print(" temperature :");
-            Serial.println(receive[i]);
+            lcd.print(" temperature :");
+            lcd.println(receive[i]);
             }          
         }
       }
