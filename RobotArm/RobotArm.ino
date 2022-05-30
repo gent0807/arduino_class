@@ -6,7 +6,7 @@ SoftwareSerial Master1(2,3);
 //SoftwareSerial Slave2(4,5);
 //const int led1=4;
 byte action[]={5,6,9};
-byte sensing[]={4};
+byte sensing[]={4,8};
 const int cds_output=7;
 void setup() {
   // put your setup code here, to run once:
@@ -59,8 +59,7 @@ else if(c=='1'){
   }
 }*/
 byte receive[3];
-byte state[1];
-
+byte state[3];
 Master1.readBytes(receive,3);
 for(int i=0;i<3;i++){
   if((i==0||i==1)&&receive[i]=='0'){
@@ -70,6 +69,14 @@ for(int i=0;i<3;i++){
     else if(i==0&&digitalRead(sensing[i])==HIGH){
     state[i]='0';
     }
+    else if(i==1){
+      DHT11 dht11(sensing[i]);
+      float temp=0.0, humi=0.0;
+      if(dht11.read(humi,temp)==0){
+        state[i]=(byte)humi;
+        state[i+1]=(byte)temp;
+        }
+      }
     digitalWrite(action[i],LOW);
     }
   else if((i==0||i==1)&&receive[i]=='1'){
@@ -79,6 +86,14 @@ for(int i=0;i<3;i++){
     else if(i==0&&digitalRead(sensing[i])==HIGH){
     state[i]='0';
     }
+    else if(i==1){
+      DHT11 dht11(sensing[i]);
+      float temp=0.0, humi=0.0;
+      if(dht11.read(humi,temp)==0){
+        state[i]=(byte)humi;
+        state[i+1]=(byte)temp;
+        }
+      }
     digitalWrite(action[i],HIGH);
     }  
   else if(receive[i]>=2){
@@ -88,10 +103,10 @@ for(int i=0;i<3;i++){
     }
   }
 
-Master1.write(state,1);
+Master1.write(state,3);
 
 byte brightness=analogRead(A0);
-if(brightness<100){
+if(brightness<9){
   digitalWrite(cds_output, HIGH);
   }
 else digitalWrite(cds_output, LOW);

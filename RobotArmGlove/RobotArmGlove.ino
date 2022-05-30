@@ -61,9 +61,9 @@ void loop() {
       Slave1.write('1');
       }
       */
-    byte receive[1];
+    byte receive[3];
     byte state[3];
-    Slave1.readBytes(receive,1);
+    Slave1.readBytes(receive,3);
     for(int i=0;i<3;i++){
         if((i==0||i==1)&&digitalRead(sensing[i])==LOW){
           state[i]='0';
@@ -77,9 +77,10 @@ void loop() {
           
            
           } 
-          
-          
-          
+          else if(i==1&&receive[i]>=0){
+            Serial.print("humid :");
+            Serial.print(receive[i]);
+            }
           
          }
         else if((i==0||i==1)&&digitalRead(sensing[i])==HIGH){
@@ -93,12 +94,20 @@ void loop() {
          
           
           } 
+          else if(i==1&&receive[i]>=0){
+            Serial.print("humid :");
+            Serial.print(receive[i]);
+            }
           
           }
         else if((i==2)&&analogRead(sensing[i])>=0){
           int r=analogRead(sensing[i]);
           r=map(r,0,1023,2,255);
           state[i]=(byte)r;
+          if(receive[i]>=0){
+            Serial.print(" temperature :");
+            Serial.println(receive[i]);
+            }          
         }
       }
     
