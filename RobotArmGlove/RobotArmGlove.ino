@@ -67,54 +67,70 @@ void loop() {
     byte state[3];
     Slave1.readBytes(receive,3);
     for(int i=0;i<3;i++){
-        if((i==0||i==1)&&digitalRead(sensing[i])==LOW){
-          state[i]='0';
+       if(i==0){
+            if(digitalRead(sensing[0]==LOW)){
+                  state[0]='0';
           
-          if(i==0&&receive[i]=='0'){
-          noTone(action[i]);
+                  if(receive[0]=='0'){
+                        noTone(action[0]);
+                  }
+                  else if(receive[0]=='1'){
+                        tone(action[0],294);
+                   }  
+          
+             }
+             if(digitalRead(sensing[0])==HIGH){
+                   state[0]='1';
+
+                  if(receive[0]=='0'){
+                        noTone(action[0]);
+                  }
+                  else if(receive[0]=='1'){
+                        tone(action[0],294);      
+                  } 
+             }
+
+
           }
-          else if(i==0&&receive[i]=='1'){
+       if(i==1){
+              if(digitalRead(sensing[1]==LOW)){
+                    state[1]='0';
+ 
+                 if(receive[1]>=0){
+                    lcd.clear();
+                    lcd.setCursor(0,0);
+                    lcd.print("humid :");
+                    lcd.print(receive[1]);
+                }  
           
-          tone(action[i],294);
-          
+               }
+               if(digitalRead(sensing[1])==HIGH){
+                     state[1]='1';
+
+                  if(receive[1]>=0){
+                     lcd.clear();
+                     lcd.setCursor(0,0);
+                     lcd.print("humid :");
+                     lcd.print(receive[1]);
+                 }  
            
-          } 
-          else if(i==1&&receive[i]>=0){
-            lcd.clear();
-            lcd.setCursor(0,0);
-            lcd.print("humid :");
-            lcd.print(receive[i]);
+                }
+
           }
+         if(i==2){
+            if(analogRead(sensing[2])>=0){
+               int r=analogRead(sensing[2]);
+               r=map(r,0,1023,0,255);
+               state[2]=(byte)r;
+
+               if(receive[2]>=0){
+                  lcd.setCursor(0,1);
+                  lcd.print("temperature:");
+                  lcd.print(receive[2]);
+               }          
+             }
          }
-        else if((i==0||i==1)&&digitalRead(sensing[i])==HIGH){
-          state[i]='1';
-          if(i==0&&receive[i]=='0'){
-          noTone(action[i]);
-          }
-          else if(i==0&&receive[i]=='1'){
-         
-          tone(action[i],294);
-         
-          
-          } 
-          else if(i==1&&receive[i]>=0){
-            lcd.clear();
-            lcd.setCursor(0,0);
-            lcd.print("humid:");
-            lcd.print(receive[i]);
-            }
-          
-          }
-        else if((i==2)&&analogRead(sensing[i])>=0){
-          int r=analogRead(sensing[i]);
-          r=map(r,0,1023,2,255);
-          state[i]=(byte)r;
-          if(receive[i]>=0){
-            lcd.setCursor(0,1);
-            lcd.print("temperature:");
-            lcd.print(receive[i]);
-            }          
-        }
+
       }
     
        Slave1.write(state,3);
