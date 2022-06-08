@@ -62,51 +62,65 @@ byte receive[3];
 byte state[3];
 Master1.readBytes(receive,3);
 for(int i=0;i<3;i++){
-  if((i==0||i==1)&&receive[i]=='0'){
-    if(i==0&&digitalRead(sensing[i])==LOW){
-    state[i]='1';
-    }
-    else if(i==0&&digitalRead(sensing[i])==HIGH){
-    state[i]='0';
-    }
-    else if(i==1){
-      DHT11 dht11(sensing[i]);
-      float temp=0.0, humi=0.0;
-      if(dht11.read(humi,temp)==0){
-        state[i]=(byte)humi;
-        state[i+1]=(byte)temp;
-        }
+     if(i==0){
+         if(receive[0]=='0'){
+             if(digitalRead(sensing[0])==LOW){
+                     state[0]='1';
+             }
+             else if(digitalRead(sensing[0])==HIGH){
+                     state[0]='0';
+             }
+             digitalWrite(action[0], LOW);
+         }
+         if(receive[0]=='1'){
+              if(digitalRead(sensing[0])==LOW){
+                     state[0]='1';
+             }
+              else if(digitalRead(sensing[0])==HIGH){
+                     state[0]='0';
+             }
+              digitalWrite(action[0], HIGH);
+         }
+         
       }
-    digitalWrite(action[i],LOW);
-    }
-  else if((i==0||i==1)&&receive[i]=='1'){
-    if(i==0&&digitalRead(sensing[i])==LOW){
-    state[i]='1';
-    }
-    else if(i==0&&digitalRead(sensing[i])==HIGH){
-    state[i]='0';
-    }
-    else if(i==1){
-      DHT11 dht11(sensing[i]);
-      float temp=0.0, humi=0.0;
-      if(dht11.read(humi,temp)==0){
-        state[i]=(byte)humi;
-        state[i+1]=(byte)temp;
-        }
-      }
-    digitalWrite(action[i],HIGH);
-    }  
-  else if(receive[i]>=2){
-    if(action[i]==action[2]){
-    analogWrite(action[i],receive[i]-(byte)2);
-    }
-    }
-  }
+      if(i==1){
+           if(receive[1]=='0'){
+               if(digitalRead(sensing[1])==LOW){
+                       state[1]='1';
+               }
+               else if(digitalRead(sensing[1])==HIGH){
+                       state[1]='0';
+               }
+               digitalWrite(action[1], LOW);
+              
+           }
+           if(receive[1]=='1'){
+                if(digitalRead(sensing[1])==LOW){
+                       state[1]='1';
+                }
+                else if(digitalRead(sensing[1])==HIGH){
+                       state[1]='0';
+                }
+                digitalWrite(action[1], HIGH);
+                }
+                DHT11 dht11(sensing[1]);
+                float temp=0.0, humi=0.0;
+                if(dht11.read(humi,temp)==0){
+                    state[1]=(byte)humi;
+                    state[2]=(byte)temp;
+                }
+            }
+        if(i==2){
+                 if(receive[2]>=0){
+                 analogWrite(action[2], receive[2]);
+            }
+            } 
+}
 
 Master1.write(state,3);
 
 byte brightness=analogRead(A0);
-if(brightness<9){
+if(brightness<30){
   digitalWrite(cds_output, HIGH);
   }
 else digitalWrite(cds_output, LOW);
