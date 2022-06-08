@@ -1,4 +1,4 @@
-#include <DHT11.h>
+   #include <DHT11.h>
 
 #include <SoftwareSerial.h>
 
@@ -55,7 +55,7 @@ else if(c=='1'){
   digitalWrite(led1, LOW);
   }
 else if(c=='1'){
-  digitalWrite(led1, HIGH);
+  digitalWrite( led1, HIGH);
   }
 }*/
 byte receive[3];
@@ -120,7 +120,7 @@ for(int i=0;i<3;i++){
 Master1.write(state,3);
 
 byte brightness=analogRead(A0);
-if(brightness<30){
+if(brightness<60){
   digitalWrite(cds_output, HIGH);
   }
 else digitalWrite(cds_output, LOW);
