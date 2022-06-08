@@ -2,13 +2,13 @@
 #include <Wire.h>
 
 #include <SoftwareSerial.h>
-SoftwareSerial Slave1(2,3);
+SoftwareSerial Slave1(10,3);
 LiquidCrystal_I2C lcd(0x27,16,2);
 
 //const int button1=4;
 //const int button2=5;
-byte sensing[]={4,5,A0};
-byte action[]={7};
+byte sensing[]={4,5,A0,A1,A2,A3,A4};
+byte action[]={8}; 
 void setup() {
   // put your setup code here, to run once:
   lcd.begin();
@@ -70,24 +70,31 @@ void loop() {
        if(i==0){
             if(digitalRead(sensing[0]==LOW)){
                   state[0]='0';
-          
-                  if(receive[0]=='0'){
-                        noTone(action[0]);
-                  }
-                  else if(receive[0]=='1'){
-                        tone(action[0],294);
-                   }  
-          
+               
+
+                if(receive[0]=='0'){
+                   digitalWrite(action[0], LOW);
+                }
+                
+                
+                if(receive[0]=='1'){
+                   digitalWrite(action[0], HIGH);
+                }
+              
              }
              if(digitalRead(sensing[0])==HIGH){
                    state[0]='1';
-
-                  if(receive[0]=='0'){
-                        noTone(action[0]);
-                  }
-                  else if(receive[0]=='1'){
-                        tone(action[0],294);      
-                  } 
+                if(receive[0]=='0'){
+                   digitalWrite(action[0], LOW);
+                }
+                
+                
+                if(receive[0]=='1'){
+                   digitalWrite(action[0], HIGH);
+                }
+                  
+          
+                   
              }
 
 
