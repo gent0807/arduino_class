@@ -7,7 +7,7 @@ LiquidCrystal_I2C lcd(0x27,16,2);
 
 //const int button1=4;
 //const int button2=5;
-byte sensing[]={4,5,A0,A1,A2,A3,A4};
+byte sensing[]={4,5,A0,A1,A2,A3,A4,A5};
 byte action[]={8}; 
 void setup() {
   // put your setup code here, to run once:
@@ -64,9 +64,9 @@ void loop() {
       }
       */
     byte receive[3];
-    byte state[3];
+    byte state[7];
     Slave1.readBytes(receive,3);
-    for(int i=0;i<3;i++){
+    for(int i=0;i<7;i++){
        if(i==0){
             if(digitalRead(sensing[0]==LOW)){
                   state[0]='0';
@@ -137,10 +137,35 @@ void loop() {
                }          
              }
          }
-
+         if(i==3){
+            byte value=analogRead(sensing[3]);
+            Serial.println(value);
+            state[3]=(byte)analogRead(sensing[3]);          
+          }
+          if(i==4){
+            byte value=analogRead(sensing[4]);
+            //Serial.println(value);
+            state[4]=(byte)analogRead(sensing[4]);          
+          }
+          if(i==5){
+            byte value=analogRead(sensing[5]);
+            //Serial.println(value);
+            state[5]=(byte)analogRead(sensing[5]);    
+          }
+          if(i==6){
+            byte value=analogRead(sensing[6]);
+            //Serial.println(value);
+            state[6]=(byte)analogRead(sensing[6]);             
+          }
+          if(i==7){
+            byte value=analogRead(sensing[7]);
+            //Serial.println(value);
+            state[7]=(byte)analogRead(sensing[7]);             
+          }
+          
       }
     
-       Slave1.write(state,3);
+       Slave1.write(state,8);
    /*byte receive[1];
    if(Slave1.available()){
     Slave1.readBytes(receive,1);
