@@ -7,7 +7,7 @@ SoftwareSerial Master1(2,3);
 DHT11 dht11(8);
 
 
-int action[]={5,6,9};
+int action[]={12,13,9};
 byte sensing[]={4,8};
 const int cds_output=7;
 float temp=0.0, humi=0.0;
