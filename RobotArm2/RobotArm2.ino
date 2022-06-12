@@ -20,7 +20,7 @@ void setup() {
   
   Master1.begin(9600);
   Serial.begin(9600);
-
+  finger1.attach(11);
   /*finger1.attach(10);
   finger1.write(70);
   finger2.attach(11);
@@ -37,7 +37,7 @@ void loop() {
 //byte receive[4];
 //int i;
 
-finger1.attach(10);
+
 finger1.write(60);
 delay(1000);
 finger1.write(180);

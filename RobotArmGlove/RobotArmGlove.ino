@@ -21,6 +21,7 @@ void setup() {
 
 }
 void loop() {
+    
     byte receive[3];
     byte state[3];
     Slave1.readBytes(receive,3);
@@ -106,5 +107,6 @@ void loop() {
       }
     
        Slave1.write(state,3);
+   
  
 }
