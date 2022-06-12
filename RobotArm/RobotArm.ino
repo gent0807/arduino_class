@@ -7,7 +7,7 @@ SoftwareSerial Master1(2,3);
 DHT11 dht11(8);
 
 
-int action[]={5,6,9};
+int action[]={12,13,9};
 byte sensing[]={4,8};
 const int cds_output=7;
 float temp=0.0, humi=0.0;
@@ -17,7 +17,6 @@ void setup() {
   Master1.begin(9600);
   Serial.begin(9600);
   
- 
   
   for(int i=0;i<3;i++){
     pinMode(action[i], OUTPUT);
@@ -31,7 +30,8 @@ void setup() {
     
 }
 void loop() {
-  
+
+
 byte receive[3];
 byte state[3];
 Master1.readBytes(receive,3);
@@ -91,9 +91,6 @@ else digitalWrite(cds_output, LOW);
       
         
 }
-
-Master1.write(state,3);
-
 
 
 }

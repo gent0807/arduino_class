@@ -10,30 +10,33 @@ Servo finger2;
 Servo finger3;
 Servo finger4;
 
-int action[]={10,11,12,13};
-
-
-
 void setup() {
   
   
   
   Master1.begin(9600);
   Serial.begin(9600);
+<<<<<<< HEAD
   finger1.attach(11);
   /*finger1.attach(10);
   finger1.write(70);
+=======
+
+  finger1.attach(10);
+  finger1.write(0);
+>>>>>>> cf95bed6ec4a5e6a43524372b2fdd92ddf8e0df3
   finger2.attach(11);
-  finger2.write(70);
-  finger3.attach(12);
-  finger3.write(70);
-  finger4.attach(13);
-  finger4.write(70);
-  */
+  finger2.write(0);
+  finger3.attach(5);
+  finger3.write(0);
+  finger4.attach(6);
+  finger4.write(0);
+  
 
   
 }
 void loop() {
+<<<<<<< HEAD
 //byte receive[4];
 //int i;
 
@@ -69,21 +72,70 @@ delay(1000);
     if(i==1){
        
        
+=======
+byte receive[4];
+Master1.readBytes(receive,4);
+for(int i=0; i<4; i++){
+  if(i==0){
+      if(receive[0]<240){
+           finger1.write(180);  
+>>>>>>> cf95bed6ec4a5e6a43524372b2fdd92ddf8e0df3
        }
-
-     if(i==2){
-       
-      
-
-       }          
-     if(i==3){
-       
-        
-             
-               
+      if(receive[0]>=240){
+           finger1.write(0);
+       }            
+   }
+  if(i==1){
+       if(receive[1]>180){
+            finger2.write(180);
         } 
-  
-    }*/
+       if(receive[1]<=180){
+            finger2.write(0);
+        }     
+    }
+  if(i==2){   
+       if(receive[2]<60){
+            finger3.write(180);
+        }
+       if(receive[2]>=57){
+            finger3.write(0);
+        }
+      }
+  if(i==3){
+       if(receive[3]>230){
+            finger4.write(0);
+      }
+       if(receive[3]<200){
+            finger4.write(180);
+      }    
+     }  
+ }
 
 
 }
+/*if(receive[0]<240){
+  finger1.write(180);  
+  }
+if(receive[0]>=240){
+  finger1.write(0);
+  } 
+if(receive[1]>180){
+  finger2.write(180);
+  } 
+if(receive[1]<=180){
+  finger2.write(0);
+  } 
+ if(receive[2]<60){
+  finger3.write(180);
+  }
+ if(receive[2]>=57){
+  finger3.write(0);
+  }
+ if(receive[3]>230){
+ finger4.write(0);
+ }
+ if(receive[3]<200){
+  finger4.write(180);
+ }*/  
+
+ 
