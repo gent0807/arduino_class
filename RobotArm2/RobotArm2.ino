@@ -16,10 +16,10 @@ void setup() {
   
   Master1.begin(9600);
   Serial.begin(9600);
-<<<<<<< HEAD
+  HEAD
   finger1.attach(11);
-  /*finger1.attach(10);
-  finger1.write(70);
+  finger1.attach(10);
+  finger1.write(0);
 =======
 
   finger1.attach(10);
@@ -36,9 +36,7 @@ void setup() {
   
 }
 void loop() {
-<<<<<<< HEAD
-//byte receive[4];
-//int i;
+
 
 
 finger1.write(60);
@@ -113,7 +111,7 @@ for(int i=0; i<4; i++){
 
 
 }
-/*if(receive[0]<240){
+if(receive[0]<240){
   finger1.write(180);  
   }
 if(receive[0]>=240){
@@ -136,6 +134,6 @@ if(receive[1]<=180){
  }
  if(receive[3]<200){
   finger4.write(180);
- }*/  
+}
 
  

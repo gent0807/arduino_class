@@ -5,9 +5,20 @@
 
 SoftwareSerial Master1(2,3);
 DHT11 dht11(8);
+Servo finger1;
+Servo finger2;
+Servo finger3;
+Servo finger4;
+
+Servo wrist1;
+Servo wrist2;
+Servo elbow1;
+Servo elbow2;
+Servo axis;
 
 
-int action[]={12,13,9};
+
+int action[]={12,13,9}; 
 byte sensing[]={4,8};
 const int cds_output=7;
 float temp=0.0, humi=0.0;
@@ -32,9 +43,9 @@ void setup() {
 void loop() {
 
 
-byte receive[3];
+byte receive[7];
 byte state[3];
-Master1.readBytes(receive,3);
+Master1.readBytes(receive,7);
 for(int i=0;i<3;i++){
 byte brightness=analogRead(A0);
 if(brightness<70){
@@ -87,6 +98,10 @@ else digitalWrite(cds_output, LOW);
                  if(receive[2]>=0  ){
                  analogWrite(action[2], receive[2]);
             }
+            finger1.write(receive[3]);
+            finger2.write(receive[3]);
+            finger3.write(receive[3]);
+            finger4.write(receive[3]);
         }
       
         
